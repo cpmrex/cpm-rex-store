@@ -24,6 +24,7 @@ async function loadCars() {
 
 allCars = data || [];
 searchCars();
+}
 
 function filterCars(category) {
   currentCategory = category;
