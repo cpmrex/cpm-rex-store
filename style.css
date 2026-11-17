@@ -421,3 +421,111 @@ footer {
 .search-box input::placeholder {
   color: #aaa;
 }
+/* ===== CPM REX PREMIUM THEME ===== */
+
+header {
+  background: #111419;
+  border-bottom: 1px solid #343b45;
+  box-shadow: 0 4px 20px #00000066;
+}
+
+.logo {
+  filter: drop-shadow(0 0 8px #4da3ff66);
+}
+
+nav a:hover {
+  color: #4da3ff;
+  text-shadow: 0 0 10px #4da3ff66;
+}
+
+.hero {
+  background:
+    radial-gradient(ellipse at 15% 50%, #4da3ff18, transparent 48%),
+    linear-gradient(135deg, #101318, #1b2028, #0b0d12);
+  border-bottom: 1px solid #343b45;
+}
+
+.hero h2 {
+  text-shadow: 0 0 14px #4da3ff55;
+}
+
+.hero p {
+  color: #b8c0ca;
+}
+
+.hero .btn,
+#carList button,
+.car button,
+.btn {
+  background: linear-gradient(110deg, #287bc9, #aeb8c4);
+  color: #080b10;
+  box-shadow: 0 0 12px #4da3ff33;
+}
+
+#carList button:hover,
+.car button:hover,
+.btn:hover {
+  box-shadow: 0 0 18px #4da3ff77;
+}
+
+section h2 {
+  text-shadow: 0 0 12px #4da3ff44;
+}
+
+#search,
+#carName,
+#carPrice,
+#carDescription,
+#carImage,
+#carImageFile,
+.search-box input {
+  background: #15191f;
+  border: 1px solid #596575;
+  color: #f1f3f5;
+}
+
+#search:focus,
+.search-box input:focus {
+  border-color: #4da3ff;
+  box-shadow: 0 0 12px #4da3ff44;
+}
+
+#carList > div,
+.car {
+  background: linear-gradient(145deg, #20252d, #111419);
+  border: 1px solid #424c59;
+  box-shadow: 0 5px 18px #00000055;
+}
+
+#carList > div:hover,
+.car:hover {
+  border-color: #4da3ff;
+  box-shadow: 0 0 18px #4da3ff33;
+}
+
+#carList img,
+.car img {
+  background: #101318;
+}
+
+#carList h3,
+.car h3 {
+  color: #e5eaf0;
+}
+
+.category-buttons button {
+  background: #171c23;
+  color: #bfcbd8;
+  border: 1px solid #596575;
+}
+
+.category-buttons button:hover {
+  background: #4da3ff;
+  color: #080b10;
+}
+
+footer {
+  background: #111419;
+  border-top: 1px solid #343b45;
+  color: #aeb8c4;
+}
