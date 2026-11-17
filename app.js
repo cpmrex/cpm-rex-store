@@ -24,8 +24,6 @@ async function loadCars() {
 
 allCars = data || [];
 searchCars();
-populateBattleCars();
-}
 
 function filterCars(category) {
   currentCategory = category;
