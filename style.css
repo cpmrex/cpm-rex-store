@@ -529,22 +529,22 @@ footer {
   border-top: 1px solid #343b45;
   color: #aeb8c4;
 
-  .cart-section button {
-  font-size: 26px !important;
-  padding: 22px 45px !important;
-  min-width: 280px !important;
-  min-height: 70px !important;
-  border-radius: 16px !important;
+.cart-section button {
+  font-size: 30px !important;
+  padding: 25px 50px !important;
+  min-width: 300px !important;
+  min-height: 80px !important;
+  border-radius: 18px !important;
   font-weight: bold !important;
-  display: inline-block !important;
-  transform: scale(1.1);
+  transform: none !important;
 }
+
 @media (max-width: 768px) {
   .cart-section button {
-    font-size: 22px !important;
-    padding: 18px 30px !important;
-    min-width: 240px !important;
-    min-height: 65px !important;
-    transform: scale(1.05);
+    font-size: 26px !important;
+    padding: 22px 35px !important;
+    min-width: 270px !important;
+    min-height: 75px !important;
+    transform: none !important;
   }
 }
