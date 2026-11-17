@@ -15,8 +15,9 @@
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: linear-gradient(135deg, #08090c, #171a20, #0b0d12);
+  color: #e5e7eb;
+  min-height: 100vh;
 }
 
 header {
