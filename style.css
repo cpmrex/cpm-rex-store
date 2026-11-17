@@ -528,12 +528,14 @@ footer {
   background: #111419;
   border-top: 1px solid #343b45;
   color: #aeb8c4;
-}
-.cart-section button {
-  font-size: 22px;
-  padding: 18px 35px;
-  min-width: 220px;
-  border-radius: 14px;
-  font-weight: bold;
-  cursor: pointer;
+
+  .cart-section button {
+  font-size: 26px !important;
+  padding: 22px 45px !important;
+  min-width: 280px !important;
+  min-height: 70px !important;
+  border-radius: 16px !important;
+  font-weight: bold !important;
+  display: inline-block !important;
+  transform: scale(1.1);
 }
