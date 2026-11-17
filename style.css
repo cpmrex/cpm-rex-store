@@ -1,12 +1,11 @@
 :root {
-  --blue: #087dff;
-  --pink: #ff24c8;
-  --bg: #05050a;
-  --card: #101018;
-  --text: #f5f5ff;
-  --muted: #999bad;
+  --blue: #4da3ff;
+  --pink: #aeb8c4;
+  --bg: #0b0d12;
+  --card: #171a20;
+  --text: #f1f3f5;
+  --muted: #a5adb8;
 }
-
 * {
   margin: 0;
   padding: 0;
