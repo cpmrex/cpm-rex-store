@@ -539,3 +539,12 @@ footer {
   display: inline-block !important;
   transform: scale(1.1);
 }
+@media (max-width: 768px) {
+  .cart-section button {
+    font-size: 22px !important;
+    padding: 18px 30px !important;
+    min-width: 240px !important;
+    min-height: 65px !important;
+    transform: scale(1.05);
+  }
+}
