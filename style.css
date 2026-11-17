@@ -50,9 +50,10 @@ header {
 
 .brand p {
   margin-top: 5px;
-  color: #b8b8ce;
+  color: #aeb8c4;
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  font-weight: 500;
 }
 
 nav {
