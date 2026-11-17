@@ -529,3 +529,11 @@ footer {
   border-top: 1px solid #343b45;
   color: #aeb8c4;
 }
+.cart-section button {
+  font-size: 22px;
+  padding: 18px 35px;
+  min-width: 220px;
+  border-radius: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
