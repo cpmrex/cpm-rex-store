@@ -42,8 +42,10 @@ header {
 .brand h1 {
   font-size: clamp(19px, 4vw, 29px);
   letter-spacing: 2px;
-  color: white;
-  text-shadow: 0 0 12px var(--blue), 0 0 18px var(--pink);
+  color: #e5e7eb;
+  text-shadow: 0 0 10px rgba(0, 170, 255, 0.45);
+  font-weight: 800;
+
 }
 
 .brand p {
