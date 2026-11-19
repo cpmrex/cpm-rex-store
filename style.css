@@ -45,10 +45,11 @@ header,
 }
 
 .site-header .logo {
-  width: 62px;
-  height: 62px;
+  width: 45px !important;
+  height: 45px !important;
+  max-width: 45px !important;
+  object-fit: contain;
   border-radius: 50%;
-  object-fit: cover;
   flex-shrink: 0;
 }
 
