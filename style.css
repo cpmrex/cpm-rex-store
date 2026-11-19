@@ -490,3 +490,14 @@ footer {
     background-repeat: no-repeat !important;
   }
 }
+@media screen and (max-width: 768px) {
+  section.hero {
+    background-image:
+      linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.50)),
+      url("./mercedes.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 300px !important;
+  }
+}
