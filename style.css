@@ -108,13 +108,26 @@ nav a:hover {
   align-items: center;
   text-align: center;
 
-  background-color: #080808;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.60)),
-    url("./mercedes.jpg");
-  background-size: cover, 80% auto;
-  background-position: center center, center center;
-  background-repeat: no-repeat, no-repeat;
+ /* HERO */
+
+.hero {
+  min-height: 420px;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+ background-color: #080808 !important;
+
+background-image:
+  linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.50)),
+  url("./mercedes.jpg") !important;
+
+background-size: 100% 100%, 60% auto !important;
+background-position: center, center !important;
+background-repeat: no-repeat, no-repeat !important;
 
   border-bottom: 1px solid var(--border);
 }
@@ -133,6 +146,9 @@ nav a:hover {
   font-size: 16px;
   margin-bottom: 25px;
 }
+  border-bottom: 1px solid var(--border);
+}
+
 
 /* BUTTONS */
 
