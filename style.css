@@ -109,10 +109,9 @@ nav a:hover {
   text-align: center;
 
   background-color: #080808;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.55)),
-    url("./mercedes.jpg");
-
+  background:
+  linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.60)),
+  url("./mercedes.jpg") center center / cover no-repeat;
   background-size: 100% 100%, 100% auto;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
