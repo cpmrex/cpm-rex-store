@@ -479,3 +479,14 @@ footer {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+@media (max-width: 768px) {
+  .hero {
+    min-height: 300px !important;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.55)),
+      url("./mercedes.jpg") !important;
+    background-size: 100% 100%, 100% auto !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+}
