@@ -107,9 +107,9 @@ nav a:hover {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background:
-    radial-gradient(ellipse at center, #d6a62a18, transparent 65%),
-    linear-gradient(135deg, #17130a, #090909 65%);
+ background:
+  linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.70)),
+  url("mercedes.jpg") center center / cover no-repeat;
   border-bottom: 1px solid var(--border);
 }
 
