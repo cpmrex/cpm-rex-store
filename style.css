@@ -41,16 +41,22 @@ header,
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 13px;
+  gap: 10px;
 }
 
+/* FIXED LOGO SIZE */
+
 .site-header .logo {
-  width: 45px !important;
-  height: 45px !important;
-  max-width: 45px !important;
-  object-fit: contain;
+  display: block;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  object-fit: contain !important;
   border-radius: 50%;
-  flex-shrink: 0;
+  flex: 0 0 40px !important;
 }
 
 .site-header .brand-text h1 {
@@ -91,7 +97,7 @@ nav a:hover {
   color: var(--gold);
 }
 
-/* HERO / MAIN SHOWCASE */
+/* HERO */
 
 .hero {
   min-height: 420px;
@@ -385,9 +391,15 @@ footer {
     gap: 10px;
   }
 
+  /* SAME LOGO SIZE ON MOBILE */
   .site-header .logo {
-    width: 54px;
-    height: 54px;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    flex: 0 0 40px !important;
   }
 
   .site-header .brand-text h1 {
@@ -445,19 +457,4 @@ footer {
   #carList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-}
-.site-header .logo,
-.site-header img {
-  width: 45px !important;
-  height: 45px !important;
-  max-width: 45px !important;
-  max-height: 45px !important;
-  object-fit: contain !important;
-  flex-shrink: 0 !important;
-}
-
-.site-header .brand {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
 }
