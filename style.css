@@ -446,3 +446,18 @@ footer {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+.site-header .logo,
+.site-header img {
+  width: 45px !important;
+  height: 45px !important;
+  max-width: 45px !important;
+  max-height: 45px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+.site-header .brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
