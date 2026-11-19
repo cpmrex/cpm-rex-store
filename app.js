@@ -176,15 +176,10 @@ function chooseOrderMethod() {
   }
 
   const choice = confirm(
-    "Order through TikTok?\n\nOK = TikTok\nCancel = WhatsApp"
+    "Do you want to place your order through WhatsApp?"
   );
 
   if (choice) {
-    window.open(
-      "https://www.tiktok.com/@rexx_cpm",
-      "_blank"
-    );
-  } else {
     checkoutCart();
   }
 }
