@@ -417,16 +417,18 @@ footer {
 
   /* MOBILE HERO IMAGE FIX */
 
-  .hero {
-    min-height: 300px;
-    padding: 45px 12px;
-    background-image:
-      linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.50)),
-      url("./mercedes.jpg");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
+ .hero {
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  padding: 20px 12px;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.50)),
+    url("./mercedes.jpg");
+  background-size: 100% 100%, contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
   .hero h2 {
     font-size: 30px;
