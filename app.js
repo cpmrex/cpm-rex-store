@@ -158,7 +158,7 @@ function checkoutCart() {
   );
 
   const message =
-    "Hello ZB DEALER!\n\nMy order:\n" +
+    "Hello CPM REXX!\n\nMy order:\n" +
     order + "\n\nTotal: PKR " + total;
 
  window.open(
