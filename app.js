@@ -8,6 +8,13 @@ const supabaseClient = supabase.createClient(
 
 let allCars = [];
 let currentCategory = "All";
+let allAccounts = [];
+let cart = [];
+
+
+// =====================================
+// LOAD CARS
+// =====================================
 
 async function loadCars() {
   const { data, error } = await supabaseClient
@@ -21,14 +28,24 @@ async function loadCars() {
     return;
   }
 
-allCars = data || [];
-searchCars();
+  allCars = data || [];
+  searchCars();
 }
+
+
+// =====================================
+// FILTER CARS
+// =====================================
 
 function filterCars(category) {
   currentCategory = category;
   searchCars();
 }
+
+
+// =====================================
+// SEARCH CARS
+// =====================================
 
 function searchCars() {
   const carList = document.getElementById("carList");
@@ -59,6 +76,7 @@ function searchCars() {
     const image = document.createElement("img");
     image.src = car.image_url;
     image.alt = car.name;
+    image.loading = "lazy";
 
     const name = document.createElement("h3");
     name.textContent = car.name;
@@ -74,13 +92,151 @@ function searchCars() {
     description.textContent = car.description || "";
 
     const button = document.createElement("button");
-   button.textContent = "ADD TO CART";
-button.onclick = () => addToCart(car);
-    
-    card.append(image, name, oldPrice, price, description, button);
+    button.textContent = "ADD TO CART";
+    button.onclick = () => addToCart(car);
+
+    card.append(
+      image,
+      name,
+      oldPrice,
+      price,
+      description,
+      button
+    );
+
     carList.appendChild(card);
   });
 }
+
+
+// =====================================
+// LOAD CPM ACCOUNTS
+// =====================================
+
+async function loadAccounts() {
+  const accountList = document.getElementById("accountList");
+
+  if (!accountList) return;
+
+  accountList.innerHTML = "<p>Loading CPM accounts...</p>";
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("accounts")
+      .select("id, name, price, description, video_url, created_at")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      throw error;
+    }
+
+    allAccounts = data || [];
+
+    searchAccounts();
+
+  } catch (error) {
+    console.error("Loading accounts failed:", error);
+
+    accountList.innerHTML =
+      "<p>Unable to load accounts. Please refresh the page.</p>";
+  }
+}
+
+
+// =====================================
+// SEARCH CPM ACCOUNTS
+// =====================================
+
+function searchAccounts() {
+  const accountList = document.getElementById("accountList");
+  const searchInput = document.getElementById("accountSearch");
+
+  if (!accountList) return;
+
+  const searchText = searchInput
+    ? searchInput.value.toLowerCase().trim()
+    : "";
+
+  accountList.innerHTML = "";
+
+  const filteredAccounts = allAccounts.filter(account => {
+    return (account.name || "")
+      .toLowerCase()
+      .includes(searchText);
+  });
+
+  if (filteredAccounts.length === 0) {
+    accountList.innerHTML = "<p>No CPM accounts available.</p>";
+    return;
+  }
+
+  filteredAccounts.forEach(account => {
+    const card = document.createElement("div");
+    card.className = "account-card";
+
+    const name = document.createElement("h3");
+    name.textContent = account.name;
+
+    const price = document.createElement("h3");
+    price.textContent = "PKR " + account.price;
+
+    const description = document.createElement("p");
+    description.textContent = account.description || "";
+
+    card.append(name, price, description);
+
+    if (account.video_url) {
+      const video = document.createElement("video");
+
+      video.src = account.video_url;
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = "none";
+
+      video.style.width = "100%";
+      video.style.height = "180px";
+      video.style.objectFit = "contain";
+      video.style.background = "#000";
+
+      card.appendChild(video);
+    }
+
+    const button = document.createElement("button");
+
+    button.textContent = "ORDER ON WHATSAPP";
+
+    button.onclick = () => {
+      orderAccountOnWhatsApp(account.name, account.price);
+    };
+
+    card.appendChild(button);
+    accountList.appendChild(card);
+  });
+}
+
+
+// =====================================
+// ACCOUNT WHATSAPP ORDER
+// =====================================
+
+function orderAccountOnWhatsApp(name, price) {
+  const phone = "923158727583";
+
+  const message =
+    `Hello CPMX!\n\nI want this account: ${name}\nPrice: PKR ${price}\n\nPlease send me the payment details.`;
+
+  window.open(
+    "https://wa.me/" + phone +
+    "?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}
+
+
+// =====================================
+// CAR WHATSAPP ORDER
+// =====================================
 
 function orderOnWhatsApp(carName, carPrice) {
   const phone = "923158727583";
@@ -98,11 +254,10 @@ Please send me your account details.`;
   );
 }
 
-let cart = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadCars();
-});
+// =====================================
+// ADD TO CART
+// =====================================
 
 function addToCart(car) {
   cart.push(car);
@@ -110,27 +265,46 @@ function addToCart(car) {
   alert("Car added to cart!");
 }
 
+
+// =====================================
+// SHOW CART
+// =====================================
+
 function showCart() {
   const box = document.getElementById("cartBox");
+
   box.style.display =
     box.style.display === "none" ? "block" : "none";
+
   updateCart();
 }
+
+
+// =====================================
+// UPDATE CART
+// =====================================
 
 function updateCart() {
   document.getElementById("cartCount").textContent = cart.length;
 
   const items = document.getElementById("cartItems");
-  const total = cart.reduce((sum, car) => sum + Number(car.price), 0);
+
+  const total = cart.reduce(
+    (sum, car) => sum + Number(car.price),
+    0
+  );
 
   items.innerHTML = "";
 
   cart.forEach((car, index) => {
     const item = document.createElement("p");
+
     item.textContent = car.name + " - PKR " + car.price;
 
     const remove = document.createElement("button");
+
     remove.textContent = "Remove";
+
     remove.onclick = () => {
       cart.splice(index, 1);
       updateCart();
@@ -143,6 +317,11 @@ function updateCart() {
   document.getElementById("cartTotal").textContent = total;
 }
 
+
+// =====================================
+// CHECKOUT CART
+// =====================================
+
 function checkoutCart() {
   if (cart.length === 0) {
     alert("Your cart is empty!");
@@ -154,19 +333,25 @@ function checkoutCart() {
   ).join("\n");
 
   const total = cart.reduce(
-    (sum, car) => sum + Number(car.price), 0
+    (sum, car) => sum + Number(car.price),
+    0
   );
 
   const message =
     "Hello CPM REXX!\n\nMy order:\n" +
     order + "\n\nTotal: PKR " + total;
 
- window.open(
-  "https://wa.me/923158727583?text=" +
-  encodeURIComponent(message),
-  "_blank"
-);
+  window.open(
+    "https://wa.me/923158727583?text=" +
+    encodeURIComponent(message),
+    "_blank"
+  );
 }
+
+
+// =====================================
+// CHOOSE ORDER METHOD
+// =====================================
 
 function chooseOrderMethod() {
   if (cart.length === 0) {
@@ -227,16 +412,27 @@ function chooseOrderMethod() {
 
   document.body.appendChild(popup);
 
-  popup.querySelector("#rexWhatsApp").onclick = function() {
+  popup.querySelector("#zbWhatsApp").onclick = function() {
     popup.remove();
     checkoutCart();
   };
 
   popup.querySelector("#rexTikTok").onclick = function() {
     popup.remove();
+
     window.open(
       "https://www.tiktok.com/@rexx_cpm",
       "_blank"
     );
   };
 }
+
+
+// =====================================
+// PAGE LOAD
+// =====================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadCars();
+  loadAccounts();
+});
