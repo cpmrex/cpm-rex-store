@@ -1,7 +1,6 @@
 const SUPABASE_URL = "https://sxmsqnjrhylnmmhghztb.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Pg4fHfhPk6CsuO29xjpeCQ_IIwthwD6";
 
-
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
@@ -86,7 +85,7 @@ button.onclick = () => addToCart(car);
 function orderOnWhatsApp(carName, carPrice) {
   const phone = "923158727583";
 
-  const message = `Hello CPM REXX!
+  const message = `Hello CPM REX!
 
 I want to pay for this car: ${carName}
 Price: PKR ${carPrice}
@@ -159,14 +158,14 @@ function checkoutCart() {
   );
 
   const message =
-    "Hello CPM REXX!\n\nMy order:\n" +
+    "Hello ZB DEALER!\n\nMy order:\n" +
     order + "\n\nTotal: PKR " + total;
 
-  window.open(
-    "https://wa.me/923158727583?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
+ window.open(
+  "https://wa.me/923158727583?text=" +
+  encodeURIComponent(message),
+  "_blank"
+);
 }
 
 function chooseOrderMethod() {
@@ -175,11 +174,69 @@ function chooseOrderMethod() {
     return;
   }
 
-  const choice = confirm(
-    "Do you want to place your order through WhatsApp?"
-  );
+  const popup = document.createElement("div");
 
-  if (choice) {
+  popup.style.cssText = `
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+  `;
+
+  popup.innerHTML = `
+    <div style="
+      background: #191919;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      width: 85%;
+      max-width: 350px;
+      border: 1px solid #e5b83f;
+    ">
+      <h2 style="color:#ffd76a; margin-bottom:20px;">
+        Choose Order Method
+      </h2>
+
+      <button id="zbWhatsApp" style="
+        display:block;
+        width:100%;
+        padding:14px;
+        margin-bottom:12px;
+        background:#25D366;
+        color:white;
+        border:0;
+        border-radius:8px;
+        font-weight:bold;
+      ">WhatsApp</button>
+
+      <button id="rexTikTok" style="
+        display:block;
+        width:100%;
+        padding:14px;
+        background:#333;
+        color:white;
+        border:0;
+        border-radius:8px;
+        font-weight:bold;
+      ">TikTok</button>
+    </div>
+  `;
+
+  document.body.appendChild(popup);
+
+  popup.querySelector("#rexWhatsApp").onclick = function() {
+    popup.remove();
     checkoutCart();
-  }
+  };
+
+  popup.querySelector("#rexTikTok").onclick = function() {
+    popup.remove();
+    window.open(
+      "https://www.tiktok.com/@rexx_cpm",
+      "_blank"
+    );
+  };
 }
