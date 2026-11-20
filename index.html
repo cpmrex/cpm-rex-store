@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +10,8 @@
 
   <meta name="theme-color" content="#05050a">
 
-  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="style.css?v=15">
+
 </head>
 
 <body>
@@ -20,86 +22,185 @@
     <div class="brand">
 
       <img
-        src="cpm-rex-logo.png"
-        alt="CPM REX Logo"
+        src="cpm-rexlogo.png"
+        alt=" cpm rex Logo"
         class="logo"
       >
 
       <div class="brand-text">
+
         <h1>CPM REXX</h1>
+
         <p>PREMIUM CPM CAR STORE</p>
+
       </div>
 
     </div>
 
   </header>
 
+
   <!-- NAVIGATION -->
   <nav>
+
     <a href="#home">Home</a>
+
     <a href="#showroom">Showroom</a>
+
+    <a href="#accounts">Accounts</a>
+
     <a href="#contact">Contact</a>
+
   </nav>
+
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <h2>WELCOME TO CPM REXX STORE</h2>
-    <p>Discover Your Dream CPM Cars</p>
-    <a href="#showroom" class="btn">EXPLORE SHOWROOM</a>
+
+   
+   
+
+    <a href="#showroom" class="btn">
+      EXPLORE SHOWROOM
+    </a>
+
   </section>
 
-  <!-- SHOWROOM -->
+
+  <!-- CAR SHOWROOM -->
   <section id="showroom">
 
-    <h2>CPM REXX SHOWROOM</h2>
+    <h2>ZB DEALER SHOWROOM</h2>
 
+
+    <!-- CAR CATEGORIES -->
     <div class="category-buttons">
-      <button onclick="filterCars('Trending Cars')">🔥 Trending</button>
-      <button onclick="filterCars('New Update Cars')">🆕 New Updates</button>
-      <button onclick="filterCars('CPM2 Cars')">🚘 CPM2</button>
-      <button onclick="filterCars('All')">All Cars</button>
+
+      <button onclick="filterCars('Trending Cars')">
+        🔥 Trending
+      </button>
+
+      <button onclick="filterCars('New Update Cars')">
+        🆕 New Updates
+      </button>
+
+      <button onclick="filterCars('CPM2 Cars')">
+        🚘 CPM2
+      </button>
+
+      <button onclick="filterCars('All')">
+        All Cars
+      </button>
+
     </div>
 
-    <!-- SEARCH -->
+
+    <!-- CAR SEARCH -->
     <div class="search-box">
+
       <input
         type="text"
         id="carSearch"
         placeholder="🔍 Search your favourite car..."
         oninput="searchCars()"
       >
+
     </div>
+
 
     <!-- CART -->
     <div class="cart-section">
+
       <button onclick="showCart()">
+
         🛒 MY CART (<span id="cartCount">0</span>)
+
       </button>
+
     </div>
 
+
     <div id="cartBox" style="display:none;">
+
       <h2>MY SHOPPING CART</h2>
+
       <div id="cartItems"></div>
-      <h3>Total: PKR <span id="cartTotal">0</span></h3>
-      <button onclick="chooseOrderMethod()">I WANT TO ORDER</button>
+
+      <h3>
+        Total: PKR <span id="cartTotal">0</span>
+      </h3>
+
+      <button onclick="chooseOrderMethod()">
+        I WANT TO ORDER
+      </button>
+
     </div>
+
 
     <!-- CAR LIST -->
     <div id="carList"></div>
 
   </section>
 
+
+
+  <!-- CPM ACCOUNTS CATALOGUE -->
+  <section id="accounts">
+
+    <h2>CPM REX ACCOUNTS</h2>
+
+    <p>
+      EXPLORE OUR PREMIUM CPM ACCOUNTS
+    </p>
+
+
+    <!-- ACCOUNT SEARCH -->
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="accountSearch"
+        placeholder="🔍 Search CPM accounts..."
+        oninput="searchAccounts()"
+      >
+
+    </div>
+
+
+    <!-- ACCOUNT CATALOGUE -->
+    <div id="accountList">
+
+      <p>Loading CPM accounts...</p>
+
+    </div>
+
+  </section>
+
+
+
   <!-- FOOTER -->
   <footer id="contact">
-    <h3>CPM REXX</h3>
+
+    <h3>ZB DEALER</h3>
+
     <p>Premium CPM Cars • Quality • Style</p>
-    <p>© 2026 CPM REXX. All rights reserved.</p>
-<p>TikTok: REXX CPM</p>
+
+    <p>CPM Accounts • Premium Collection</p>
+
+    <p>©️ 2026 CPM REX. All rights reserved.</p>
+
   </footer>
 
-  <!-- SCRIPTS -->
+
+
+  <!-- SUPABASE SCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js?v=13"></script>
+
+
+  <!-- MAIN JAVASCRIPT -->
+  <script src="app.js?v=15"></script>
+
 
 </body>
+
 </html>
