@@ -1,12 +1,12 @@
 :root {
-  --bg: #090909;
-  --surface: #141414;
-  --card: #191919;
-  --gold: #e5b83f;
-  --gold-light: #ffd76a;
-  --text: #f5f5f5;
-  --muted: #a5a5a5;
-  --border: #302817;
+  --bg: #090b12;
+  --surface: #111827;
+  --card: #151d2b;
+  --gold: #2589ff;
+  --gold-light: #65b5ff;
+  --text: #f5f8ff;
+  --muted: #a5b2c5;
+  --border: #1c3d65;
 }
 
 * {
@@ -132,7 +132,7 @@ button,
 .btn,
 .hero a {
   display: inline-block;
-  background: linear-gradient(135deg, #f5ce61, #bd8720);
+  background: linear-gradient(135deg, #65b5ff, #1261cf);
   color: #171106;
   padding: 12px 23px;
   border: none;
@@ -148,7 +148,7 @@ button:hover,
 .hero a:hover {
   background: var(--gold-light);
   transform: translateY(-2px);
-  box-shadow: 0 5px 22px #e5b83f35;
+  box-shadow: 0 5px 22px #2589ff35;
 }
 
 /* SECTIONS */
@@ -236,7 +236,7 @@ select:focus {
 .category-buttons button {
   background: #191919;
   color: var(--gold);
-  border: 1px solid #59451d;
+  border: 1px solid #1c3d65;
 }
 
 .category-buttons button:hover {
@@ -273,7 +273,7 @@ select:focus {
 .car:hover {
   transform: translateY(-5px);
   border-color: var(--gold);
-  box-shadow: 0 8px 28px #d6a62a20;
+  box-shadow: 0 8px 28px #2589ff20;
 }
 
 #carList img,
@@ -415,20 +415,20 @@ footer {
     font-size: 12px;
   }
 
-  /* MOBILE HERO IMAGE FIX */
+  /* MOBILE HERO IMAGE */
 
- .hero {
-  min-height: 0;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  padding: 20px 12px;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.50)),
-    url("./mercedes.jpg");
-  background-size: 100% 100%, contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+  .hero {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    padding: 20px 12px;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.50)),
+      url("./mercedes.jpg");
+    background-size: 100% 100%, 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
   .hero h2 {
     font-size: 30px;
@@ -465,8 +465,126 @@ footer {
   }
 }
 
+/* DESKTOP */
+
 @media (min-width: 769px) {
   #carList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .site-header {
+    padding: 10px 14px;
+  }
+
+  .site-header .brand {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .site-header .logo {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    flex: 0 0 40px !important;
+  }
+
+  .site-header .brand-text h1 {
+    font-size: 20px;
+  }
+
+  .site-header .brand-text p {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  nav {
+    gap: 15px;
+    padding: 14px 8px;
+    font-size: 12px;
+  }
+/* FIX ACCOUNT VIDEO SIZE */
+#accountList {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#accountList > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#accountList video {
+  display: block !important;
+  width: 100% !important;
+  height: 160px !important;
+  max-height: 160px !important;
+  object-fit: contain !important;
+  background: #000;
+  border-radius: 8px;
+}
+
+#accountList img {
+  display: none !important;
+}
+
+/* ADMIN CAR PRICE EDITING */
+
+#adminCars {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.admin-car-item {
+  background: #111827;
+  border: 1px solid #2589ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.admin-car-item h3 {
+  color: #65b5ff;
+  margin-bottom: 15px;
+}
+
+.admin-car-item label {
+  display: block;
+  color: white;
+  margin: 10px 0 5px;
+}
+
+.admin-car-item input {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  background: #171717;
+  color: white;
+  padding: 12px;
+  border: 1px solid #2589ff;
+  border-radius: 8px;
+}
+
+.admin-car-item button {
+  margin: 8px 5px 0 0;
 }

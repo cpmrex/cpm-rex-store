@@ -1,17 +1,18 @@
-const SUPABASE_URL = "https://sxmsqnjrhylnmmhghztb.supabase.co";
-const SUPABASE_KEY = "sb_publishable_Pg4fHfhPk6CsuO29xjpeCQ_IIwthwD6";
+const SUPABASE_URL = "https://mokjbshrwitinabzudrt.supabase.co";
+const SUPABASE_KEY = "sb_publishable_EBjXonUcfYLRLQQNw1bV0A_kPaSJ0KN";
+
 
 const db = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-// ==============================
+// ============================
 // ADMIN LOGIN
-// ==============================
+// ============================
 
 async function loginAdmin() {
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
 
   const { data, error } = await db.auth.signInWithPassword({
@@ -31,10 +32,9 @@ async function loginAdmin() {
   loadAccounts();
 }
 
-
-// ==============================
-// ADD A CAR
-// ==============================
+// ============================
+// ADD CAR WITH TWO PHOTOS
+// ============================
 
 async function addCar() {
   const name = document.getElementById("carName").value.trim();
@@ -42,10 +42,17 @@ async function addCar() {
   const originalPrice = Number(document.getElementById("originalPrice").value);
   const description = document.getElementById("carDescription").value.trim();
   const category = document.getElementById("carCategory").value;
-  const file = document.getElementById("carImageFile").files[0];
 
-  if (!name || !price || !originalPrice || !file) {
-    alert("Enter car name, both prices and select a photo.");
+  const file1 = document.getElementById("carImageFile").files[0];
+  const file2 = document.getElementById("carImageFile2").files[0];
+
+  if (!name || !price || !originalPrice || !file1) {
+    alert("Enter car name, both prices and select the first photo.");
+    return;
+  }
+
+  if (price <= 0 || originalPrice <= 0) {
+    alert("Prices must be greater than zero.");
     return;
   }
 
@@ -54,87 +61,202 @@ async function addCar() {
     return;
   }
 
-  const extension = file.name.split(".").pop();
-  const filePath = `${Date.now()}.${extension}`;
-
-  const { error: uploadError } = await db.storage
-    .from("car-images")
-    .upload(filePath, file, {
-      contentType: file.type,
-      upsert: false
-    });
-
-  if (uploadError) {
-    alert("Photo upload failed: " + uploadError.message);
+  if (!file1.type.startsWith("image/")) {
+    alert("Please select a valid first image.");
     return;
   }
 
-  const { data: imageData } = db.storage
-    .from("car-images")
-    .getPublicUrl(filePath);
-
-  const { error } = await db.from("cars").insert([{
-    name,
-    price,
-    original_price: originalPrice,
-    description,
-    category,
-    image_url: imageData.publicUrl,
-    is_active: true
-  }]);
-
-  if (error) {
-    alert("Car save failed: " + error.message);
+  if (file2 && !file2.type.startsWith("image/")) {
+    alert("Please select a valid second image.");
     return;
   }
 
-  alert("Car and both prices added successfully!");
+  const uploadPhoto = async (file, suffix) => {
+    if (!file) return null;
 
-  document.getElementById("carName").value = "";
-  document.getElementById("carPrice").value = "";
-  document.getElementById("originalPrice").value = "";
-  document.getElementById("carDescription").value = "";
-  document.getElementById("carImageFile").value = "";
+    const extension = file.name.split(".").pop();
 
-  loadCars();
+    const filePath =
+      `${Date.now()}-${suffix}-${Math.random().toString(36).slice(2)}.${extension}`;
+
+    const { error } = await db.storage
+      .from("car-images")
+      .upload(filePath, file, {
+        contentType: file.type,
+        upsert: false
+      });
+
+    if (error) throw error;
+
+    const { data } = db.storage
+      .from("car-images")
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  };
+
+  try {
+    const imageUrl = await uploadPhoto(file1, "first");
+    const secondImageUrl = await uploadPhoto(file2, "second");
+
+    const { error } = await db.from("cars").insert([{
+      name,
+      price,
+      original_price: originalPrice,
+      description,
+      category,
+      image_url: imageUrl,
+      second_image_url: secondImageUrl,
+      is_active: true
+    }]);
+
+    if (error) throw error;
+
+    alert("Car added successfully with photos!");
+
+    document.getElementById("carName").value = "";
+    document.getElementById("carPrice").value = "";
+    document.getElementById("originalPrice").value = "";
+    document.getElementById("carDescription").value = "";
+    document.getElementById("carImageFile").value = "";
+    document.getElementById("carImageFile2").value = "";
+
+    loadCars();
+
+  } catch (error) {
+    alert("Car upload failed: " + error.message);
+  }
 }
 
-
-// ==============================
-// SHOW CARS
-// ==============================
+// ============================
+// LOAD CARS
+// ============================
 
 async function loadCars() {
+  console.log("UPDATED ADMIN PRICE EDITING VERSION LOADED");
+
   const { data, error } = await db
     .from("cars")
     .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
-    alert(error.message);
+    alert("Loading cars failed: " + error.message);
     return;
   }
 
   const container = document.getElementById("adminCars");
+
+  if (!container) return;
+
   container.innerHTML = "";
 
-  data.forEach(car => {
+  (data || []).forEach(car => {
     const item = document.createElement("div");
-    item.textContent = `${car.name} - PKR ${car.price}`;
+    item.className = "admin-car-item";
+
+    const name = document.createElement("h3");
+    name.textContent = car.name;
+
+    const originalLabel = document.createElement("label");
+    originalLabel.textContent = "Real Price (Old Price)";
+
+    const originalInput = document.createElement("input");
+    originalInput.type = "number";
+    originalInput.min = "1";
+    originalInput.value = car.original_price ?? "";
+
+    const priceLabel = document.createElement("label");
+    priceLabel.textContent = "Discounted Price (New Price)";
+
+    const priceInput = document.createElement("input");
+    priceInput.type = "number";
+    priceInput.min = "1";
+    priceInput.value = car.price ?? "";
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "SAVE PRICE";
+    saveButton.className = "btn";
+
+    saveButton.onclick = () => {
+      updateCarPrice(
+        car.id,
+        originalInput.value,
+        priceInput.value,
+        saveButton
+      );
+    };
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "DELETE";
     deleteButton.onclick = () => deleteCar(car.id);
 
-    item.appendChild(deleteButton);
+    item.append(
+      name,
+      originalLabel,
+      originalInput,
+      priceLabel,
+      priceInput,
+      saveButton,
+      deleteButton
+    );
+
     container.appendChild(item);
   });
 }
 
+// ============================
+// UPDATE CAR PRICE
+// ============================
 
-// ==============================
-// DELETE A CAR
-// ==============================
+async function updateCarPrice(id, originalValue, priceValue, button) {
+  const originalPrice = Number(originalValue);
+  const price = Number(priceValue);
+
+  if (
+    !originalValue ||
+    !priceValue ||
+    !Number.isFinite(originalPrice) ||
+    !Number.isFinite(price) ||
+    originalPrice <= 0 ||
+    price <= 0
+  ) {
+    alert("Please enter valid prices greater than zero.");
+    return;
+  }
+
+  if (originalPrice < price) {
+    alert("Real price must be greater than or equal to discounted price.");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "SAVING...";
+
+  const { error } = await db
+    .from("cars")
+    .update({
+      original_price: originalPrice,
+      price: price
+    })
+    .eq("id", id);
+
+  button.disabled = false;
+  button.textContent = "SAVE PRICE";
+
+  if (error) {
+    alert("Price update failed: " + error.message);
+    return;
+  }
+
+  alert("Car price updated successfully!");
+
+  loadCars();
+}
+
+// ============================
+// DELETE CAR
+// ============================
 
 async function deleteCar(id) {
   if (!confirm("Delete this car?")) return;
@@ -145,17 +267,18 @@ async function deleteCar(id) {
     .eq("id", id);
 
   if (error) {
-    alert(error.message);
+    alert("Car deletion failed: " + error.message);
     return;
   }
+
+  alert("Car deleted successfully!");
 
   loadCars();
 }
 
-
-// ==============================
-// ADD ACCOUNT WITH VIDEO
-// ==============================
+// ============================
+// ADD CPM ACCOUNT
+// ============================
 
 async function addAccount() {
   const name = document.getElementById("accountName").value.trim();
@@ -163,13 +286,8 @@ async function addAccount() {
   const description = document.getElementById("accountDescription").value.trim();
   const file = document.getElementById("accountVideoFile").files[0];
 
-  if (!name || !price || !file) {
-    alert("Enter account name, price and select a video.");
-    return;
-  }
-
-  if (price <= 0) {
-    alert("Enter a valid account price.");
+  if (!name || !price || price <= 0 || !file) {
+    alert("Enter account name, a valid price and select a video.");
     return;
   }
 
@@ -179,9 +297,9 @@ async function addAccount() {
   }
 
   const extension = file.name.split(".").pop();
-  const filePath = `${Date.now()}-${Math.random().toString(36).slice(2)}.${extension}`;
 
-  // Upload video to Supabase Storage
+  const filePath =
+    `${Date.now()}-${Math.random().toString(36).slice(2)}.${extension}`;
 
   const { error: uploadError } = await db.storage
     .from("account-videos")
@@ -195,30 +313,24 @@ async function addAccount() {
     return;
   }
 
-  // Get public video URL
-
   const { data: videoData } = db.storage
     .from("account-videos")
     .getPublicUrl(filePath);
 
-  // Save account in database
-
-  const { error } = await db
-    .from("accounts")
-    .insert([{
-      name,
-      price,
-      description,
-      video_url: videoData.publicUrl,
-      is_active: true
-    }]);
+  const { error } = await db.from("accounts").insert([{
+    name,
+    price,
+    description,
+    video_url: videoData.publicUrl,
+    is_active: true
+  }]);
 
   if (error) {
     alert("Account save failed: " + error.message);
     return;
   }
 
-  alert("Account added successfully!");
+  alert("CPM Account added successfully!");
 
   document.getElementById("accountName").value = "";
   document.getElementById("accountPrice").value = "";
@@ -228,77 +340,68 @@ async function addAccount() {
   loadAccounts();
 }
 
-
-// ==============================
-// LOAD ACCOUNTS IN ADMIN PANEL
-// ==============================
+// ============================
+// LOAD ACCOUNTS
+// ============================
 
 async function loadAccounts() {
-  const container = document.getElementById("adminAccounts");
-
   const { data, error } = await db
     .from("accounts")
     .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
-    container.textContent = "Could not load accounts: " + error.message;
+    alert("Loading accounts failed: " + error.message);
     return;
   }
+
+  const container = document.getElementById("adminAccounts");
+
+  if (!container) return;
 
   container.innerHTML = "";
 
-  if (!data || data.length === 0) {
-    container.textContent = "No accounts added yet.";
-    return;
-  }
-
-  data.forEach(account => {
+  (data || []).forEach(account => {
     const item = document.createElement("div");
 
     const name = document.createElement("h3");
     name.textContent = account.name;
 
     const price = document.createElement("p");
-    price.textContent = `PKR ${account.price}`;
+    price.textContent = "PKR " + account.price;
 
     const description = document.createElement("p");
     description.textContent = account.description || "";
 
-    item.appendChild(name);
-    item.appendChild(price);
-    item.appendChild(description);
-
-    if (account.video_url) {
-      const video = document.createElement("video");
-      video.src = account.video_url;
-      video.controls = true;
-      video.playsInline = true;
-      video.preload = "metadata";
-      video.style.width = "100%";
-      video.style.maxWidth = "350px";
-
-      item.appendChild(video);
-    }
+    const video = document.createElement("video");
+    video.src = account.video_url;
+    video.controls = true;
+    video.playsInline = true;
+    video.style.width = "100%";
+    video.style.maxWidth = "350px";
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "DELETE ACCOUNT";
-    deleteButton.onclick = () => deleteAccount(account.id, account.video_url);
+    deleteButton.onclick = () => deleteAccount(account.id);
 
-    item.appendChild(deleteButton);
+    item.append(
+      name,
+      price,
+      description,
+      video,
+      deleteButton
+    );
+
     container.appendChild(item);
   });
 }
 
-
-// ==============================
+// ============================
 // DELETE ACCOUNT
-// ==============================
+// ============================
 
-async function deleteAccount(id, videoUrl) {
+async function deleteAccount(id) {
   if (!confirm("Delete this account?")) return;
-
-  // Delete account record
 
   const { error } = await db
     .from("accounts")
@@ -306,25 +409,8 @@ async function deleteAccount(id, videoUrl) {
     .eq("id", id);
 
   if (error) {
-    alert("Account delete failed: " + error.message);
+    alert("Account deletion failed: " + error.message);
     return;
-  }
-
-  // Delete its video from Storage
-
-  if (videoUrl) {
-    const marker = "/account-videos/";
-    const videoPath = videoUrl.split(marker)[1];
-
-    if (videoPath) {
-      const { error: storageError } = await db.storage
-        .from("account-videos")
-        .remove([decodeURIComponent(videoPath)]);
-
-      if (storageError) {
-        alert("Account deleted, but video cleanup failed: " + storageError.message);
-      }
-    }
   }
 
   alert("Account deleted successfully!");
@@ -332,12 +418,13 @@ async function deleteAccount(id, videoUrl) {
   loadAccounts();
 }
 
-
-// ==============================
-// LOGOUT
-// ==============================
+// ============================
+// ADMIN LOGOUT
+// ============================
 
 async function logoutAdmin() {
   await db.auth.signOut();
   location.reload();
 }
+
+
