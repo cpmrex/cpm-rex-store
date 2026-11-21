@@ -132,10 +132,10 @@ button,
 .btn,
 .hero a {
   display: inline-block;
-  background: linear-gradient(135deg, #65b5ff, #1261cf);
+  background: linear-gradient(135deg, var(--gold-light), #b88620);
   color: #171106;
   padding: 12px 23px;
-  border: none;
+  border: 1px solid #d7a832;
   border-radius: 7px;
   font-weight: 900;
   text-decoration: none;
@@ -148,7 +148,7 @@ button:hover,
 .hero a:hover {
   background: var(--gold-light);
   transform: translateY(-2px);
-  box-shadow: 0 5px 22px #2589ff35;
+  box-shadow: 0 5px 22px #e5b83f35;
 }
 
 /* SECTIONS */
@@ -196,7 +196,7 @@ section h2 {
   font-size: 13px;
 }
 
-/* SEARCH */
+/* SEARCH AND INPUTS */
 
 .search-box {
   width: 100%;
@@ -236,7 +236,7 @@ select:focus {
 .category-buttons button {
   background: #191919;
   color: var(--gold);
-  border: 1px solid #1c3d65;
+  border: 1px solid var(--border);
 }
 
 .category-buttons button:hover {
@@ -273,7 +273,7 @@ select:focus {
 .car:hover {
   transform: translateY(-5px);
   border-color: var(--gold);
-  box-shadow: 0 8px 28px #2589ff20;
+  box-shadow: 0 8px 28px #e5b83f20;
 }
 
 #carList img,
@@ -365,6 +365,86 @@ details p {
   padding-top: 12px;
 }
 
+/* ACCOUNT VIDEOS */
+
+#accountList {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#accountList > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#accountList video {
+  display: block !important;
+  width: 100% !important;
+  height: 160px !important;
+  max-height: 160px !important;
+  object-fit: contain !important;
+  background: #000;
+  border-radius: 8px;
+}
+
+#accountList img {
+  display: none !important;
+}
+
+/* ADMIN CAR PRICE EDITING */
+
+#adminCars {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.admin-car-item {
+  background: #17130a;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.admin-car-item h3 {
+  color: var(--gold-light);
+  margin-bottom: 15px;
+}
+
+.admin-car-item label {
+  display: block;
+  color: white;
+  margin: 10px 0 5px;
+}
+
+.admin-car-item input {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  background: #171717;
+  color: white;
+  padding: 12px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+}
+
+.admin-car-item button {
+  margin: 8px 5px 0 0;
+}
+
 /* FOOTER */
 
 footer {
@@ -414,8 +494,6 @@ footer {
     padding: 14px 8px;
     font-size: 12px;
   }
-
-  /* MOBILE HERO IMAGE */
 
   .hero {
     min-height: 0;
@@ -471,120 +549,4 @@ footer {
   #carList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-}
-/* MOBILE */
-
-@media (max-width: 768px) {
-
-  .site-header {
-    padding: 10px 14px;
-  }
-
-  .site-header .brand {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 10px;
-  }
-
-  .site-header .logo {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
-    flex: 0 0 40px !important;
-  }
-
-  .site-header .brand-text h1 {
-    font-size: 20px;
-  }
-
-  .site-header .brand-text p {
-    font-size: 9px;
-    letter-spacing: 1px;
-  }
-
-  nav {
-    gap: 15px;
-    padding: 14px 8px;
-    font-size: 12px;
-  }
-/* FIX ACCOUNT VIDEO SIZE */
-#accountList {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-  gap: 12px;
-  width: 100%;
-  max-width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-#accountList > * {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-#accountList video {
-  display: block !important;
-  width: 100% !important;
-  height: 160px !important;
-  max-height: 160px !important;
-  object-fit: contain !important;
-  background: #000;
-  border-radius: 8px;
-}
-
-#accountList img {
-  display: none !important;
-}
-
-/* ADMIN CAR PRICE EDITING */
-
-#adminCars {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-width: 700px;
-  margin: 20px auto;
-}
-
-.admin-car-item {
-  background: #111827;
-  border: 1px solid #2589ff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-.admin-car-item h3 {
-  color: #65b5ff;
-  margin-bottom: 15px;
-}
-
-.admin-car-item label {
-  display: block;
-  color: white;
-  margin: 10px 0 5px;
-}
-
-.admin-car-item input {
-  display: block;
-  width: 100%;
-  margin-bottom: 12px;
-  background: #171717;
-  color: white;
-  padding: 12px;
-  border: 1px solid #2589ff;
-  border-radius: 8px;
-}
-
-.admin-car-item button {
-  margin: 8px 5px 0 0;
 }
