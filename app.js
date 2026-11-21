@@ -4,7 +4,7 @@
 
 const SUPABASE_URL = "https://mokjbshrwitinabzudrt.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_EBjXonUcfYLRLQQNw1bV0A_kPaSJ0KN";
+const SUPABASE_KEY = "sb_publishable_Pg4fHfhPk6CsuO29xjpeCQ_IIwthwD6";
 
 // Initialize Supabase only once
 const supabaseClient = window.supabase.createClient(
@@ -307,10 +307,10 @@ function searchAccounts() {
 
 function orderAccountOnWhatsApp(accountName, accountPrice) {
 
-  const phone = "923196603839";
+  const phone = "923158727585";
 
   const message =
-    "Hello ELITE CPM GARAGE!\n\n" +
+    "Hello CPM REXX!\n\n" +
     "I want to order this CPM account:\n" +
     "Account: " + accountName + "\n" +
     "Price: PKR " + accountPrice + "\n\n" +
@@ -331,9 +331,9 @@ function orderAccountOnWhatsApp(accountName, accountPrice) {
 
 function orderOnWhatsApp(carName, carPrice) {
 
-  const phone = "923196603839";
+  const phone = "923158727585";
 
-  const message = `Hello ELITE CPM GARAGE!
+  const message = `Hello CPM REXX!
 
 I want to pay for this car: ${carName}
 Price: PKR ${carPrice}
@@ -508,11 +508,11 @@ function checkoutCart() {
   );
 
   const message =
-    "Hello ELITE CPM GARAGE!\n\nMy order:\n" +
+    "Hello CPM REXX!\n\nMy order:\n" +
     order + "\n\nTotal: PKR " + total;
 
   window.open(
-    "https://wa.me/923196603839?text=" +
+    "https://wa.me/923158727585?text=" +
     encodeURIComponent(message),
     "_blank"
   );
