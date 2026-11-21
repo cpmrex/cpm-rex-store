@@ -614,7 +614,7 @@ function chooseOrderMethod() {
     popup.remove();
 
     window.open(
-      "https://www.tiktok.com/@elitecpmgarage",
+      "https://www.tiktok.com/@rexx_cpm",
       "_blank"
     );
 
