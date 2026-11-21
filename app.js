@@ -2,9 +2,9 @@
 // SUPABASE CONFIGURATION
 // =====================================
 
-const SUPABASE_URL = "https://sxmsqnjrhylnmmhghztb.supabase.co";
+const SUPABASE_URL = "https://mokjbshrwitinabzudrt.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_Pg4fHfhPk6CsuO29xjpeCQ_IIwthwD6";
+const SUPABASE_KEY = "sb_publishable_EBjXonUcfYLRLQQNw1bV0A_kPaSJ0KN";
 
 // Initialize Supabase only once
 const supabaseClient = window.supabase.createClient(
@@ -61,9 +61,14 @@ function openCarDetails(car) {
     return;
   }
 
-  const url = new URL("view-car-details.html", window.location.href);
-  url.searchParams.set("id", String(car.id));
-  window.open(url.href, "_blank", "noopener");
+  const url = new URL(
+    "view-car-details.html",
+    window.location.href
+  );
+
+  url.searchParams.set("id", car.id);
+
+  window.open(url.href, "_blank");
 }
 
 
@@ -302,10 +307,10 @@ function searchAccounts() {
 
 function orderAccountOnWhatsApp(accountName, accountPrice) {
 
-  const phone = "923158727583";
+  const phone = "923196603839";
 
   const message =
-    "Hello CPM REXX!\n\n" +
+    "Hello ELITE CPM GARAGE!\n\n" +
     "I want to order this CPM account:\n" +
     "Account: " + accountName + "\n" +
     "Price: PKR " + accountPrice + "\n\n" +
@@ -326,9 +331,9 @@ function orderAccountOnWhatsApp(accountName, accountPrice) {
 
 function orderOnWhatsApp(carName, carPrice) {
 
-  const phone = "923158727583";
+  const phone = "923196603839";
 
-  const message = `Hello CPM REXX!
+  const message = `Hello ELITE CPM GARAGE!
 
 I want to pay for this car: ${carName}
 Price: PKR ${carPrice}
@@ -352,7 +357,7 @@ let cart = [];
 try {
 
   cart = JSON.parse(
-    localStorage.getItem("REXXCart") || "[]"
+    localStorage.getItem("eliteCart") || "[]"
   );
 
   if (!Array.isArray(cart)) cart = [];
@@ -503,11 +508,11 @@ function checkoutCart() {
   );
 
   const message =
-    "Hello CPM REXX!\n\nMy order:\n" +
+    "Hello ELITE CPM GARAGE!\n\nMy order:\n" +
     order + "\n\nTotal: PKR " + total;
 
   window.open(
-    "https://wa.me/923158727583?text=" +
+    "https://wa.me/923196603839?text=" +
     encodeURIComponent(message),
     "_blank"
   );
@@ -556,7 +561,7 @@ function chooseOrderMethod() {
         Choose Order Method
       </h2>
 
-      <button id="rexWhatsApp" style="
+      <button id="zbWhatsApp" style="
         display:block;
         width:100%;
         padding:14px;
@@ -568,7 +573,7 @@ function chooseOrderMethod() {
         font-weight:bold;
       ">WhatsApp</button>
 
-      <button id="rexTikTok" style="
+      <button id="zbTikTok" style="
         display:block;
         width:100%;
         padding:14px;
@@ -596,23 +601,33 @@ function chooseOrderMethod() {
 
   document.body.appendChild(popup);
 
- popup.querySelector("#rexWhatsApp").onclick = function() {
-  popup.remove();
-  checkoutCart();
-};
+  popup.querySelector("#zbWhatsApp").onclick = function() {
 
-popup.querySelector("#rexTikTok").onclick = function() {
-  popup.remove();
+    popup.remove();
 
-  window.open(
-    "https://www.tiktok.com/@rexx_cpm",
-    "_blank"
-  );
-};
+    checkoutCart();
 
-popup.querySelector("#closeOrderPopup").onclick = function() {
-  popup.remove();
-};
+  };
+
+  popup.querySelector("#zbTikTok").onclick = function() {
+
+    popup.remove();
+
+    window.open(
+      "https://www.tiktok.com/@elitecpmgarage",
+      "_blank"
+    );
+
+  };
+
+  popup.querySelector("#closeOrderPopup").onclick = function() {
+
+    popup.remove();
+
+  };
+
+}
+
 
 // =====================================
 // WEBSITE STARTUP
