@@ -302,10 +302,10 @@ function searchAccounts() {
 
 function orderAccountOnWhatsApp(accountName, accountPrice) {
 
-  const phone = "923196603839";
+  const phone = "923158727583";
 
   const message =
-    "Hello ELITE CPM GARAGE!\n\n" +
+    "Hello CPM REXX!\n\n" +
     "I want to order this CPM account:\n" +
     "Account: " + accountName + "\n" +
     "Price: PKR " + accountPrice + "\n\n" +
@@ -326,9 +326,9 @@ function orderAccountOnWhatsApp(accountName, accountPrice) {
 
 function orderOnWhatsApp(carName, carPrice) {
 
-  const phone = "923196603839";
+  const phone = "923158727583";
 
-  const message = `Hello ELITE CPM GARAGE!
+  const message = `Hello CPM REXX!
 
 I want to pay for this car: ${carName}
 Price: PKR ${carPrice}
@@ -352,7 +352,7 @@ let cart = [];
 try {
 
   cart = JSON.parse(
-    localStorage.getItem("eliteCart") || "[]"
+    localStorage.getItem("REXXCart") || "[]"
   );
 
   if (!Array.isArray(cart)) cart = [];
@@ -503,11 +503,11 @@ function checkoutCart() {
   );
 
   const message =
-    "Hello ELITE CPM GARAGE!\n\nMy order:\n" +
+    "Hello CPM REXX!\n\nMy order:\n" +
     order + "\n\nTotal: PKR " + total;
 
   window.open(
-    "https://wa.me/923196603839?text=" +
+    "https://wa.me/923158727583?text=" +
     encodeURIComponent(message),
     "_blank"
   );
@@ -556,7 +556,7 @@ function chooseOrderMethod() {
         Choose Order Method
       </h2>
 
-      <button id="zbWhatsApp" style="
+      <button id="rexWhatsApp" style="
         display:block;
         width:100%;
         padding:14px;
@@ -568,7 +568,7 @@ function chooseOrderMethod() {
         font-weight:bold;
       ">WhatsApp</button>
 
-      <button id="zbTikTok" style="
+      <button id="rexTikTok" style="
         display:block;
         width:100%;
         padding:14px;
@@ -596,7 +596,7 @@ function chooseOrderMethod() {
 
   document.body.appendChild(popup);
 
-  popup.querySelector("#zbWhatsApp").onclick = function() {
+  popup.querySelector("#rexWhatsApp").onclick = function() {
 
     popup.remove();
 
@@ -604,12 +604,12 @@ function chooseOrderMethod() {
 
   };
 
-  popup.querySelector("#zbTikTok").onclick = function() {
+  popup.querySelector("#REXXTikTok").onclick = function() {
 
     popup.remove();
 
     window.open(
-      "https://www.tiktok.com/@elitecpmgarage",
+      "https://www.tiktok.com/@rexx_cpm",
       "_blank"
     );
 
