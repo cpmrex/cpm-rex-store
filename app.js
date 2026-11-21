@@ -596,33 +596,23 @@ function chooseOrderMethod() {
 
   document.body.appendChild(popup);
 
-  popup.querySelector("#rexWhatsApp").onclick = function() {
+ popup.querySelector("#rexWhatsApp").onclick = function() {
+  popup.remove();
+  checkoutCart();
+};
 
-    popup.remove();
+popup.querySelector("#rexTikTok").onclick = function() {
+  popup.remove();
 
-    checkoutCart();
+  window.open(
+    "https://www.tiktok.com/@rexx_cpm",
+    "_blank"
+  );
+};
 
-  };
-
-  popup.querySelector("#REXXTikTok").onclick = function() {
-
-    popup.remove();
-
-    window.open(
-      "https://www.tiktok.com/@rexx_cpm",
-      "_blank"
-    );
-
-  };
-
-  popup.querySelector("#closeOrderPopup").onclick = function() {
-
-    popup.remove();
-
-  };
-
-}
-
+popup.querySelector("#closeOrderPopup").onclick = function() {
+  popup.remove();
+};
 
 // =====================================
 // WEBSITE STARTUP
