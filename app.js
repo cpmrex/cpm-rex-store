@@ -4,7 +4,7 @@
 
 const SUPABASE_URL = "https://mokjbshrwitinabzudrt.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_EBjXonUcfYLRLQQNw1bV0A_kPaSJ0KN";
+const SUPABASE_KEY = "sb_publishable_Pg4fHfhPk6CsuO29xjpeCQ_IIwthwD6";
 
 // Initialize Supabase only once
 const supabaseClient = window.supabase.createClient(
